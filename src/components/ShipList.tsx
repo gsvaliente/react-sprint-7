@@ -1,10 +1,17 @@
+import { StarshipType } from "../types/StarshipType";
 import { Ship } from "./Ship";
 
-export function ShipList() {
+interface ShipListProps {
+  list: StarshipType[] | undefined;
+}
+
+export function ShipList({ list }: ShipListProps) {
   return (
     <div>
       <ul>
-        <Ship name="Death Star" model="Death Star Model" />
+        {list?.map((starship: StarshipType) => (
+          <Ship name={starship.name} model={starship.model} />
+        ))}
       </ul>
     </div>
   );
