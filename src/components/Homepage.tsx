@@ -1,14 +1,11 @@
 import { Header } from "./Header";
-import { Link } from "react-router-dom";
+import { NavTabs } from "./NavTabs";
 
 export function Homepage() {
   return (
     <div>
       <Header />
-      <div>
-        <button>HOMEPAGE</button>
-        <Link to={"/starships"}>STARSHIPS</Link>
-      </div>
+      <NavTabs />
       <h1>Homepage</h1>
     </div>
   );

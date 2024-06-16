@@ -1,0 +1,28 @@
+import { Link, useLocation } from "react-router-dom";
+
+export function NavTabs() {
+  const { pathname } = useLocation();
+  console.log(pathname);
+
+  return (
+    <div
+      role="tablist"
+      className="tabs-bordered tabs-sm mt-10 py-2 text-center"
+    >
+      <Link
+        role="tab"
+        to={"/"}
+        className={`tab hover:font-bold ${pathname === "/" ? "tab-active font-bold" : ""}`}
+      >
+        HOMEPAGE
+      </Link>
+      <Link
+        role="tab"
+        to={"/starships"}
+        className={`tab hover:font-bold ${pathname === "/starships" ? "tab-active font-bold" : ""}`}
+      >
+        STARSHIPS
+      </Link>
+    </div>
+  );
+}

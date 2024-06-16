@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { NavTabs, Header, ShipList } from "./components";
 import { StarshipType } from "./types/StarshipType";
-import { Header, ShipList } from "./components";
 
 export default function App() {
   const [list, setList] = useState<StarshipType[] | undefined>();
@@ -22,10 +21,7 @@ export default function App() {
   return (
     <div>
       <Header />
-      <div>
-        <Link to={"/"}>HOMEPAGE</Link>
-        <Link to={"/starships"}>STARSHIPS</Link>
-      </div>
+      <NavTabs />
       <ShipList list={list} />
     </div>
   );

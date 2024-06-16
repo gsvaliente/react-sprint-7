@@ -7,8 +7,8 @@ interface ShipListProps {
 
 export function ShipList({ list }: ShipListProps) {
   return (
-    <div>
-      <ul>
+    <div className="mt-5">
+      <ul className="flex flex-col items-center align-center space-y-5">
         {list?.map((starship: StarshipType) => (
           <Ship
             // TODO: change the url to an id

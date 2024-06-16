@@ -1,11 +1,21 @@
+import logo from "../assets/Star Wars 4.svg";
+
 export function Header() {
   return (
-    <header className="flex">
-      <h1 className="text-3xl font-bold underline">LOGO</h1>
-      <aside>
-        <p>Sign In</p>
-        <p>Register</p>
-      </aside>
+    <header className="navbar bg-base-100 pt-5">
+      <div className="navbar-start"></div>
+      <div className="navbar-center"></div>
+      <img src={logo} alt="Star Wars logo" className="bg-none h-36" />
+      <div className="navbar-end">
+        <button className="btn btn-ghost ">
+          <p>Sign In</p>
+        </button>
+        <button className="btn btn-ghost ">
+          <div className="indicator">
+            <p>Register</p>
+          </div>
+        </button>
+      </div>
     </header>
   );
 }
