@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Header } from "./components/Header";
-import { ShipList } from "./components/ShipList";
 import { StarshipType } from "./types/StarshipType";
+import { Header, ShipList } from "./components";
 
 export default function App() {
   const [list, setList] = useState<StarshipType[] | undefined>();
