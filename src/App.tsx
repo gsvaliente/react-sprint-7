@@ -4,6 +4,12 @@ import { StarshipType } from "./types/StarshipType";
 
 export default function App() {
   const [list, setList] = useState<StarshipType[] | undefined>();
+  const [selectedShip, setSelectedShip] = useState<StarshipType | null>(null);
+
+  function handleSelectShip(ship: StarshipType) {
+    setSelectedShip(ship);
+    console.log(selectedShip);
+  }
 
   // TODO: Make the function to be called in the context or redux
   useEffect(() => {
@@ -23,7 +29,7 @@ export default function App() {
     <div>
       <Header />
       <NavTabs />
-      <ShipList list={list} />
+      <ShipList list={list} onSelectShip={handleSelectShip} />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-export * from "./Ship";
+export * from "./ShipItem";
 export * from "./ShipList";
 export * from "./Header";
 export * from "./Homepage";
