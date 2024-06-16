@@ -5,6 +5,7 @@ import { StarshipType } from "./types/StarshipType";
 export default function App() {
   const [list, setList] = useState<StarshipType[] | undefined>();
 
+  // TODO: Make the function to be called in the context or redux
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch("https://swapi.dev/api/starships/?page=1");
