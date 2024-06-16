@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Header } from "./components/Header";
 import { ShipList } from "./components/ShipList";
 import { StarshipType } from "./types/StarshipType";
@@ -23,8 +24,8 @@ export default function App() {
     <div>
       <Header />
       <div>
-        <button>HOMEPAGE</button>
-        <button>STARSHIPS</button>
+        <Link to={"/"}>HOMEPAGE</Link>
+        <Link to={"/starships"}>STARSHIPS</Link>
       </div>
       <ShipList list={list} />
     </div>

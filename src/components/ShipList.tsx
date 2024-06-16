@@ -10,7 +10,12 @@ export function ShipList({ list }: ShipListProps) {
     <div>
       <ul>
         {list?.map((starship: StarshipType) => (
-          <Ship name={starship.name} model={starship.model} />
+          <Ship
+            // TODO: change the url to an id
+            key={starship.url}
+            name={starship.name}
+            model={starship.model}
+          />
         ))}
       </ul>
     </div>
