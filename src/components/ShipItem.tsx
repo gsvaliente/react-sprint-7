@@ -1,4 +1,5 @@
 import { StarshipType } from "../types/StarshipType";
+import { Link } from "react-router-dom";
 
 interface ShipProps {
   name: string;
@@ -14,6 +15,7 @@ export function ShipItem({ name, model, onSelectShip, ship }: ShipProps) {
         <div className="card-body">
           <h2 className="card-title">{name}</h2>
           <p>{model}</p>
+          <span>{ship.url}</span>
         </div>
       </div>
     </li>

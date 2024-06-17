@@ -9,6 +9,7 @@ export default function App() {
 
   function handleSelectShip(ship: StarshipType) {
     setSelectedShip(ship);
+    console.log(selectedShip);
   }
 
   // TODO: Make the function to be called in the context or redux

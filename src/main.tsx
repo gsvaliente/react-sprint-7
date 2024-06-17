@@ -6,6 +6,7 @@ import App from "./App.tsx";
 import "./index.css";
 import { Homepage } from "./components/Homepage.tsx";
 import { NotFound } from "./components/NotFound.tsx";
+import { ShipDetails } from "./components/ShipDetails.tsx";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
   {
     path: "/starships",
     element: <App />,
+  },
+  {
+    path: "/starships/:url",
+    element: <ShipDetails />,
   },
 ]);
 
