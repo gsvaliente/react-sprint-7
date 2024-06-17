@@ -1,11 +1,11 @@
-import logo from "../assets/Star Wars 4.svg";
+import logo2 from "../assets/sw logo.png";
 
 export function Header() {
   return (
     <header className="navbar bg-base-100 pt-10">
       <div className="navbar-start"></div>
       <div className="navbar-center"></div>
-      <img src={logo} alt="Star Wars logo" className="bg-none h-36" />
+      <img src={logo2} alt="Star Wars logo" className="h-32" />
       <div className="navbar-end">
         <button className="btn btn-ghost ">
           <p>Sign In</p>
