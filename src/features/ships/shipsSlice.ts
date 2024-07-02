@@ -1,6 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { Dispatch } from 'redux';
-import { StarshipType } from '../../types/Ship.interface';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import type { AppDispatch } from '../../store';
+import type { StarshipType } from '../../types/Ship.interface';
 
 export interface ShipsState {
   shipList: StarshipType[];
@@ -18,13 +19,13 @@ const shipsSlice = createSlice({
   name: 'ships',
   initialState,
   reducers: {
-    findShips(state, action) {
+    findShips(state, action: PayloadAction<StarshipType[]>) {
       state.isLoading = false;
       state.isError = '';
       state.shipList = action.payload;
     },
-    notFound(state) {
-      state.isError = 'Error finding ships';
+    notFound(state, action: PayloadAction<string>) {
+      state.isError = action.payload;
       state.isLoading = false;
     },
     findingShips(state) {
@@ -39,13 +40,17 @@ export function findShips(url: string) {
       type: 'ships/notFound',
     };
 
-  return async function (dispatch: Dispatch) {
-    dispatch({ type: 'ships/findingShips' });
+  return async function (dispatch: AppDispatch) {
+    try {
+      dispatch({ type: 'ships/findingShips' });
 
-    const res = await fetch(url);
-    const data = await res.json();
+      const res = await fetch(url);
+      const data = await res.json();
 
-    dispatch({ type: 'ships/findShips', payload: data.results });
+      dispatch({ type: 'ships/findShips', payload: data.results });
+    } catch (error: any) {
+      dispatch({ type: 'ships/notFound', payload: error.message });
+    }
   };
 }
 

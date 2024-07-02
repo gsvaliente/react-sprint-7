@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/useReduxHooks';
 import { ShipsState, findShips } from './shipsSlice';
 
 const API_URL = 'https://swapi.dev/api/starships/?page=1';
 
 function ShipList() {
-  const dispatch = useDispatch();
-  const { shipList, isLoading, isError }: ShipsState = useSelector(
-    (store) => store.ships
+  const dispatch = useAppDispatch();
+  const { shipList, isLoading, isError }: ShipsState = useAppSelector(
+    (shop) => shop.ships
   );
 
   useEffect(() => {
