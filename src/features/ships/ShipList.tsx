@@ -2,19 +2,19 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/useReduxHooks';
 import { PageNav } from '../ui/PageNav';
 import { ShipItem } from './ShipItem';
-import { ShipsState, findShips } from './shipsSlice';
+import { ShipsState, findShips, nextPage, prevPage } from './shipsSlice';
 
-const API_URL = 'https://swapi.dev/api/starships/?page=1';
+const API_URL = 'https://swapi.dev/api/starships/?page=';
 
 function ShipList() {
   const dispatch = useAppDispatch();
-  const { shipList, isLoading, isError }: ShipsState = useAppSelector(
+  const { shipList, isLoading, isError, page }: ShipsState = useAppSelector(
     (shop) => shop.ships
   );
 
   useEffect(() => {
-    dispatch(findShips(API_URL));
-  }, [dispatch]);
+    dispatch(findShips(`${API_URL}${page}`));
+  }, [dispatch, page]);
 
   return (
     <>
@@ -30,6 +30,8 @@ function ShipList() {
               />
             ))}
       </ul>
+      {page > 1 && <button onClick={() => dispatch(prevPage())}>prev</button>}
+      {page < 4 && <button onClick={() => dispatch(nextPage())}>next</button>}
     </>
   );
 }

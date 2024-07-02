@@ -9,6 +9,7 @@ export interface ShipsState {
   isLoading: boolean;
   isError: string;
   image: string;
+  page: number;
 }
 
 const initialState: ShipsState = {
@@ -17,6 +18,7 @@ const initialState: ShipsState = {
   isLoading: false,
   isError: '',
   image: '',
+  page: 1,
 };
 
 const shipsSlice = createSlice({
@@ -45,6 +47,13 @@ const shipsSlice = createSlice({
     findingShips(state) {
       state.isLoading = true;
       state.image = '';
+    },
+    nextPage(state) {
+      state.page++;
+    },
+    prevPage(state) {
+      if (state.page > 1) state.page--;
+      return;
     },
   },
 });
@@ -115,5 +124,6 @@ export function findShipImage(url: string) {
   };
 }
 
-export const { findingShips, notFound } = shipsSlice.actions;
+export const { findingShips, notFound, nextPage, prevPage } =
+  shipsSlice.actions;
 export default shipsSlice.reducer;
