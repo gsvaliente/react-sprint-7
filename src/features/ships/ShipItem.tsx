@@ -8,7 +8,7 @@ interface ShipItemProps {
 
 export function ShipItem({ ship }: ShipItemProps) {
   const id = getIdFromUrl(ship.url);
-  console.log(id);
+
   return (
     <li>
       <Link to={`${id}`}>

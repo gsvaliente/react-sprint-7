@@ -8,6 +8,7 @@ export interface ShipsState {
   ship: StarshipType | undefined;
   isLoading: boolean;
   isError: string;
+  image: string;
 }
 
 const initialState: ShipsState = {
@@ -15,6 +16,7 @@ const initialState: ShipsState = {
   ship: undefined,
   isLoading: false,
   isError: '',
+  image: '',
 };
 
 const shipsSlice = createSlice({
@@ -31,12 +33,18 @@ const shipsSlice = createSlice({
       state.isError = '';
       state.ship = action.payload;
     },
+    findShipImage(state, action: PayloadAction<string>) {
+      state.isLoading = false;
+      state.isError = '';
+      state.image = action.payload;
+    },
     notFound(state, action: PayloadAction<string>) {
       state.isError = action.payload;
       state.isLoading = false;
     },
     findingShips(state) {
       state.isLoading = true;
+      state.image = '';
     },
   },
 });
@@ -76,6 +84,31 @@ export function findShip(url: string) {
       const data = await res.json();
 
       dispatch({ type: 'ships/findShip', payload: data });
+    } catch (error: any) {
+      dispatch({ type: 'ships/notFound', payload: error.message });
+    }
+  };
+}
+
+export function findShipImage(url: string) {
+  if (!url)
+    return {
+      type: 'ships/notFound',
+      payload: 'No Url Provided',
+    };
+
+  return async function (dispatch: AppDispatch) {
+    try {
+      dispatch({ type: 'ships/findingShips' });
+      const res = await fetch(url);
+
+      res.ok
+        ? dispatch({ type: 'ships/findShipImage', payload: res.url })
+        : dispatch({
+            type: 'ships/findShipImage',
+            payload:
+              'https://starwars-visualguide.com/assets/img/big-placeholder.jpg',
+          });
     } catch (error: any) {
       dispatch({ type: 'ships/notFound', payload: error.message });
     }
