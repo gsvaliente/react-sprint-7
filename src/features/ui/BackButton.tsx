@@ -12,5 +12,12 @@ export function BackButton({ children }: BackButtonProps) {
     e.preventDefault();
     navigate(-1);
   }
-  return <button onClick={handleClick}>{children}</button>;
+  return (
+    <button
+      className='text-yellow-300 border-2 px-4 py-2 border-yellow-300 rounded-lg hover:bg-yellow-200 hover:text-black'
+      onClick={handleClick}
+    >
+      {children}
+    </button>
+  );
 }
