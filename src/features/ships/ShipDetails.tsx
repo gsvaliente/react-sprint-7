@@ -1,11 +1,12 @@
-import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks/useReduxHooks';
-import { BackButton } from '../ui/BackButton';
-import { findShip, findShipImage } from './shipsSlice';
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../hooks/useReduxHooks";
+import { BackButton } from "../ui/BackButton";
+import { findShip, findShipImage } from "./shipsSlice";
+import { Loader } from "../ui/Loader";
 
 const URL = `https://swapi.dev/api/starships/`;
-const IMAGE_URL = 'https://starwars-visualguide.com/assets/img/starships/';
+const IMAGE_URL = "https://starwars-visualguide.com/assets/img/starships/";
 
 export function ShipDetails() {
   const dispatch = useAppDispatch();
@@ -19,9 +20,8 @@ export function ShipDetails() {
 
   return (
     <div>
-      {/* <img src={`${IMAGE_URL}${id}.jpg`} /> */}
       <img src={image} />
-      <div>{isLoading ? 'Loading...' : <h1>{ship?.name}</h1>}</div>
+      <div>{isLoading ? <Loader /> : <h1>{ship?.name}</h1>}</div>
       <BackButton>Back</BackButton>
     </div>
   );

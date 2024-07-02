@@ -1,9 +1,9 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import './App.css';
-import { ShipDetails } from './features/ships/ShipDetails';
-import ShipList from './features/ships/ShipList';
-import { Homepage } from './pages/Homepage';
-import { PageNotFound } from './pages/PageNotFound';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ShipDetails } from "./features/ships/ShipDetails";
+import ShipList from "./features/ships/ShipList";
+import { Homepage } from "./pages/Homepage";
+import { PageNotFound } from "./pages/PageNotFound";
+import { AppLayout } from "./pages/AppLayout";
 
 function App() {
   return (
@@ -11,20 +11,29 @@ function App() {
       <Routes>
         <Route
           index
-          element={<Homepage />}
+          element={
+            <AppLayout>
+              <Homepage />
+            </AppLayout>
+          }
         />
         <Route
-          path='spaceships'
-          element={<ShipList />}
+          path="spaceships"
+          element={
+            <AppLayout>
+              <ShipList />
+            </AppLayout>
+          }
         />
         <Route
-          path='spaceships/:id'
-          element={<ShipDetails />}
+          path="spaceships/:id"
+          element={
+            <AppLayout>
+              <ShipDetails />
+            </AppLayout>
+          }
         />
-        <Route
-          path='*'
-          element={<PageNotFound />}
-        />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </BrowserRouter>
   );
