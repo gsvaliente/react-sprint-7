@@ -1,42 +1,48 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { ShipDetails } from "./features/ships/ShipDetails";
-import ShipList from "./features/ships/ShipList";
-import { Homepage } from "./pages/Homepage";
-import { PageNotFound } from "./pages/PageNotFound";
-import { AppLayout } from "./pages/AppLayout";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { ShipDetails } from './features/ships/ShipDetails';
+import ShipList from './features/ships/ShipList';
+import { AppLayout } from './pages/AppLayout';
+import { Homepage } from './pages/Homepage';
+import Login from './pages/Login';
+import { PageNotFound } from './pages/PageNotFound';
+import Register from './pages/Register';
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          index
-          element={
-            <AppLayout>
-              <Homepage />
-            </AppLayout>
-          }
-        />
-        <Route
-          path="spaceships"
-          element={
-            <AppLayout>
-              <ShipList />
-            </AppLayout>
-          }
-        />
-        <Route
-          path="spaceships/:id"
-          element={
-            <AppLayout>
-              <ShipDetails />
-            </AppLayout>
-          }
-        />
-        <Route path="*" element={<PageNotFound />} />
-      </Routes>
-    </BrowserRouter>
-  );
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route
+                    path='/'
+                    element={<AppLayout />}
+                >
+                    <Route
+                        index
+                        element={<Homepage />}
+                    />
+                    <Route
+                        path='spaceships'
+                        element={<ShipList />}
+                    />
+                    <Route
+                        path='spaceships/:id'
+                        element={<ShipDetails />}
+                    />
+                </Route>
+                <Route
+                    path='register'
+                    element={<Register />}
+                />
+                <Route
+                    path='login'
+                    element={<Login />}
+                />
+                <Route
+                    path='*'
+                    element={<PageNotFound />}
+                />
+            </Routes>
+        </BrowserRouter>
+    );
 }
 
 export default App;

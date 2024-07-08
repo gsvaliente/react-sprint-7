@@ -2,7 +2,13 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/useReduxHooks';
 import { Loader } from '../ui/Loader';
 import { ShipItem } from './ShipItem';
-import { ShipsState, findShips, nextPage, prevPage } from './shipsSlice';
+import {
+  ShipsState,
+  findShips,
+  loadMore,
+  nextPage,
+  prevPage,
+} from './shipsSlice';
 
 const API_URL = 'https://swapi.dev/api/starships/?page=';
 
@@ -13,8 +19,9 @@ function ShipList() {
   );
 
   useEffect(() => {
-    dispatch(findShips(`${API_URL}${page}`));
-  }, [dispatch, page]);
+    // dispatch(findShips(`${API_URL}${page}`));
+    dispatch(findShips(`${API_URL}1`));
+  }, [dispatch]);
 
   return (
     <div className='mt-5'>
@@ -50,6 +57,9 @@ function ShipList() {
               »
             </button>
           )}
+          <button onClick={() => dispatch(loadMore(`${API_URL}${page}`))}>
+            load more
+          </button>
         </div>
       )}
     </div>
