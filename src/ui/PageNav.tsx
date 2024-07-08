@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { useAppSelector } from '../../hooks/useReduxHooks';
+import { useAppSelector } from '../hooks/useReduxHooks';
 
 export function PageNav() {
     const { pathname } = useLocation();

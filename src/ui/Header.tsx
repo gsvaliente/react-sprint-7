@@ -1,8 +1,8 @@
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import logo from '../../assets/sw logo.png';
-import { useAppSelector } from '../../hooks/useReduxHooks';
-import {logout} from '../users/usersSlice'
+import logo from '../assets/sw logo.png';
+import { logout } from '../features/users/usersSlice';
+import { useAppSelector } from '../hooks/useReduxHooks';
 
 export function Header() {
     const { isAuth } = useAppSelector(store => store.users);
@@ -19,7 +19,7 @@ export function Header() {
             />
             <div className='navbar-end'>
                 {isAuth ? (
-                    <button onClick={()=>dispatch(logout())}>Logout</button>
+                    <button onClick={() => dispatch(logout())}>Logout</button>
                 ) : (
                     <>
                         <button className='btn btn-ghost '>

@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import { Header } from '../features/ui/Header';
-import { PageNav } from '../features/ui/PageNav';
 import { useAppSelector } from '../hooks/useReduxHooks';
+import { Header } from '../ui/Header';
+import { PageNav } from '../ui/PageNav';
 
 export function AppLayout() {
     const isAuth = useAppSelector(store => store.users.isAuth);
