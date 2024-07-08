@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { Header } from '../features/ui/Header';
@@ -29,45 +29,71 @@ export default function Register() {
         }
     }
 
-    if (isAuth) navigate('/');
+    useEffect(() => {
+        if (isAuth) navigate('/');
+    }, [isAuth, navigate]);
 
     return (
-        <div>
+        <div className='font-spaceMono'>
             <Header />
             <PageNav />
-            <h2>Register</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Enter Email</label>
-                    <input
-                        type='text'
-                        placeholder='email'
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label>Enter Password</label>
-                    <input
-                        type='password'
-                        placeholder='password'
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label>Confirm Password</label>
-                    <input
-                        type='password'
-                        placeholder='password'
-                        value={passwordConfirm}
-                        onChange={e => setPasswordConfirm(e.target.value)}
-                    />
-                </div>
-                {error.length > 0 && <p>{error}</p>}
-                <button disabled={isLoading}>Register</button>
-            </form>
-            <Link to='/login'>Already have an account? Click here</Link>
+            <h2 className='text-center font-semibold text-xl my-10 uppercase'>
+                Register
+            </h2>
+            <div className='flex items-center justify-center uppercase flex-col'>
+                <form onSubmit={handleSubmit}>
+                    <div className='flex flex-col'>
+                        <label className='ml-1.5'>Enter Email</label>
+                        <input
+                            className='text-sm rounded-3xl px-2.5 py-2 my-2 placeholder:text-stone-700 placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-yellow-200'
+                            type='text'
+                            placeholder='luke@skywalker.com'
+                            value={email}
+                            required
+                            onChange={e => setEmail(e.target.value)}
+                        />
+                    </div>
+                    <div className='flex flex-col'>
+                        <label className='ml-1.5'>Enter Password</label>
+                        <input
+                            className='text-sm rounded-3xl px-2.5 py-2 my-2 placeholder:text-stone-700 placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-yellow-200'
+                            type='password'
+                            placeholder='password'
+                            value={password}
+                            required
+                            onChange={e => setPassword(e.target.value)}
+                        />
+                    </div>
+                    <div className='flex flex-col'>
+                        <label className='ml-1.5'>Confirm Password</label>
+                        <input
+                            className='text-sm rounded-3xl px-2.5 py-2 my-2 placeholder:text-stone-700 placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-yellow-200'
+                            type='password'
+                            placeholder='password'
+                            value={passwordConfirm}
+                            required
+                            onChange={e => setPasswordConfirm(e.target.value)}
+                        />
+                    </div>
+                    {error.length > 0 && (
+                        <p className='text-xs text-red-300 rounded-full ml-2'>
+                            {error}
+                        </p>
+                    )}
+                    <button
+                        className='mt-5 btn btn-wide'
+                        disabled={isLoading}
+                    >
+                        Register
+                    </button>
+                </form>
+                <Link
+                    className='text-xs mt-5 '
+                    to='/login'
+                >
+                    Already have an account? Click here
+                </Link>
+            </div>
         </div>
     );
 }

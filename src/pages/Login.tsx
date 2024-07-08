@@ -24,33 +24,51 @@ export default function Login() {
     }, [isAuth, navigate]);
 
     return (
-        <div>
+        <div className='font-spaceMono'>
             <Header />
             <PageNav />
-            <h2>Login</h2>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Enter Email</label>
-                    <input
-                        type='text'
-                        placeholder='email'
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label>Enter Password</label>
-                    <input
-                        type='password'
-                        placeholder='password'
-                        value={password}
-                        onChange={e => setPassword(e.target.value)}
-                    />
-                </div>
+            <h2 className='text-center font-semibold text-xl my-10 uppercase'>
+                Login
+            </h2>
+            <div className='flex items-center justify-center uppercase flex-col'>
+                <form onSubmit={handleSubmit}>
+                    <div className='flex flex-col'>
+                        <label>Enter Email</label>
+                        <input
+                            className='text-sm rounded-3xl px-2.5 py-2 my-2 placeholder:text-stone-700 placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-yellow-200'
+                            type='text'
+                            required
+                            placeholder='email'
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
+                        />
+                    </div>
+                    <div className='flex flex-col'>
+                        <label>Enter Password</label>
+                        <input
+                            className='text-sm rounded-3xl px-2.5 py-2 my-2 placeholder:text-stone-700 placeholder:text-sm focus:outline-none focus:ring-2 focus:ring-yellow-200'
+                            type='password'
+                            required
+                            placeholder='password'
+                            value={password}
+                            onChange={e => setPassword(e.target.value)}
+                        />
+                    </div>
 
-                <button disabled={isLoading}>Sign In</button>
-            </form>
-            <Link to='/register'>I do not have an account, Register here</Link>
+                    <button
+                        className='mt-5 btn btn-wide'
+                        disabled={isLoading}
+                    >
+                        Sign In
+                    </button>
+                </form>
+                <Link
+                    className='text-xs mt-5'
+                    to='/register'
+                >
+                    I do not have an account, Register here
+                </Link>
+            </div>
         </div>
     );
 }
