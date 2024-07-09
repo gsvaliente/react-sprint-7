@@ -110,10 +110,7 @@ export function ShipDetails() {
                     </>
                 )}
             </div>
-            <div>
-                <Title>pilots</Title>
-                <PilotList />
-            </div>
+            <PilotList />
         </div>
     );
 }
