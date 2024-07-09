@@ -15,7 +15,8 @@ export interface UsersState {
 }
 
 const initialState: UsersState = {
-    isAuth: false,
+    //TODO change back to false
+    isAuth: true,
     isLoading: false,
     error: '',
     userData: null,

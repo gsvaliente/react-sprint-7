@@ -4,6 +4,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks/useReduxHooks';
 import { BackButton } from '../../ui/BackButton';
 import { Loader } from '../../ui/Loader';
 import { Title } from '../../ui/Title';
+import PilotList from '../pilots/PilotList';
+import { findPilots } from '../pilots/pilotsSlice';
 import { findShip, findShipImage } from './shipsSlice';
 
 const URL = `https://swapi.dev/api/starships/`;
@@ -11,13 +13,23 @@ const IMAGE_URL = 'https://starwars-visualguide.com/assets/img/starships/';
 
 export function ShipDetails() {
     const dispatch = useAppDispatch();
-    const { isLoading, ship, image } = useAppSelector(store => store.ships);
+    const { isLoading, ship, image, pilots } = useAppSelector(
+        store => store.ships
+    );
     const { id } = useParams();
 
     useEffect(() => {
         dispatch(findShip(`${URL}${id}`));
         dispatch(findShipImage(`${IMAGE_URL}${id}.jpg`));
     }, [dispatch, id]);
+
+    useEffect(() => {
+        // if (pilots?.length === 0) {
+        //     dispatch(clearPilots());
+        //     return;
+        // }
+        pilots?.forEach(pilot => dispatch(findPilots(pilot)));
+    }, [dispatch, pilots]);
 
     return (
         <div className='mt-10 max-w-6xl mx-auto'>
@@ -36,7 +48,7 @@ export function ShipDetails() {
                             />
                         </figure>
                         <div className='card-body bg-zinc-700 border-l-4 border-red-500'>
-                            <div className=''>
+                            <div>
                                 <h2 className='card-title uppercase pb-2'>
                                     {ship?.name}
                                 </h2>
@@ -97,6 +109,10 @@ export function ShipDetails() {
                         </div>
                     </>
                 )}
+            </div>
+            <div>
+                <Title>pilots</Title>
+                <PilotList />
             </div>
         </div>
     );

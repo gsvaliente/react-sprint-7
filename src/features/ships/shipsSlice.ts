@@ -10,6 +10,8 @@ export interface ShipsState {
     isError: string;
     image: string;
     page: number;
+    films: string[] | null;
+    pilots: string[] | null;
 }
 
 const initialState: ShipsState = {
@@ -19,6 +21,8 @@ const initialState: ShipsState = {
     isError: '',
     image: '',
     page: 1,
+    films: null,
+    pilots: null,
 };
 
 const shipsSlice = createSlice({
@@ -30,10 +34,19 @@ const shipsSlice = createSlice({
             state.isError = '';
             state.shipList = [...action.payload];
         },
+        clearShip(state) {
+            state.isLoading = false;
+            state.isError = '';
+            state.ship = undefined;
+            state.films = null;
+            state.pilots = null;
+        },
         findShip(state, action: PayloadAction<StarshipType>) {
             state.isLoading = false;
             state.isError = '';
             state.ship = action.payload;
+            state.films = action.payload.films;
+            state.pilots = action.payload.pilots;
         },
         findShipImage(state, action: PayloadAction<string>) {
             state.isLoading = false;
@@ -145,6 +158,6 @@ export function findShipImage(url: string) {
     };
 }
 
-export const { findingShips, notFound, nextPage, prevPage } =
+export const { findingShips, notFound, nextPage, prevPage, clearShip } =
     shipsSlice.actions;
 export default shipsSlice.reducer;

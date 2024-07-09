@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/useReduxHooks';
 import { Loader } from '../../ui/Loader';
+import { clearPilots } from '../pilots/pilotsSlice';
 import { ShipItem } from './ShipItem';
 import {
     ShipsState,
+    clearShip,
     findShips,
     loadMore,
     nextPage,
@@ -21,6 +23,11 @@ function ShipList() {
     useEffect(() => {
         // dispatch(findShips(`${API_URL}${page}`));
         dispatch(findShips(`${API_URL}1`));
+    }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(clearPilots());
+        dispatch(clearShip());
     }, [dispatch]);
 
     return (
