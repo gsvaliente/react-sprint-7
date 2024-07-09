@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { getIdFromUrl } from '../../helpers/getIdFromUrl';
 
 export interface PilotsState {
     pilotData: PilotType[] | [];
     isLoading: boolean;
     isError: string;
-    image: string;
+    images: string[];
 }
 
 export interface PilotType {
@@ -25,13 +26,15 @@ export interface PilotType {
     created: Date;
     edited: Date;
     url: string;
+    id: string;
+    image: string;
 }
 
 const initialState: PilotsState = {
     pilotData: [],
     isLoading: false,
     isError: '',
-    image: '',
+    images: [],
 };
 
 const pilotsSlice = createSlice({
@@ -57,8 +60,18 @@ const pilotsSlice = createSlice({
             })
             .addCase(findPilots.fulfilled, (state, action) => {
                 state.isLoading = false;
-                state.pilotData = [...state.pilotData, action.payload];
+                state.pilotData = [
+                    ...state.pilotData,
+                    {
+                        ...action.payload,
+                        id: getIdFromUrl(action.payload.url),
+                        image: `https://starwars-visualguide.com/assets/img/characters/${getIdFromUrl(
+                            action.payload.url
+                        )}.jpg`,
+                    },
+                ];
             })
+
             .addCase(findPilots.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = action.error.message || '';
@@ -72,6 +85,7 @@ export const findPilots = createAsyncThunk(
         try {
             const res = await fetch(url);
             const data = await res.json();
+
             return data;
         } catch (error: any) {
             return rejectWithValue(

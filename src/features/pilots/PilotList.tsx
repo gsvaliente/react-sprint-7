@@ -1,20 +1,27 @@
 import { useAppSelector } from '../../hooks/useReduxHooks';
+import Card from '../../ui/Card';
 import { Title } from '../../ui/Title';
 
 export default function PilotList() {
-    // const { pilots } = useAppSelector(store => store.ships);
     const { pilotData } = useAppSelector(store => store.pilots);
 
+    //TODO maybe return a string that says no pilots were found
     if (!pilotData[0]) return null;
 
     return (
-        <div>
+        <div className='mt-10'>
             <div>
                 <Title>pilots</Title>
             </div>
-            {pilotData.map(pilot => (
-                <p key={pilot.name}>{pilot.name}</p>
-            ))}
+            <div className='flex gap-4 my-5'>
+                {pilotData.map(pilot => (
+                    <Card
+                        key={pilot.name}
+                        name={pilot.name}
+                        img={pilot.image}
+                    />
+                ))}
+            </div>
         </div>
     );
 }
