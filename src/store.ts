@@ -1,4 +1,5 @@
 import { Action, ThunkAction, configureStore } from '@reduxjs/toolkit';
+import moviesReducer from './features/movies/moviesSlice';
 import pilotsReducer from './features/pilots/pilotsSlice';
 import shipsReducer from './features/ships/shipsSlice';
 import usersReducer from './features/users/usersSlice';
@@ -8,6 +9,7 @@ const store = configureStore({
         ships: shipsReducer,
         users: usersReducer,
         pilots: pilotsReducer,
+        movies: moviesReducer,
     },
 });
 

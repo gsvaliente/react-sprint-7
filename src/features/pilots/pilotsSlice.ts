@@ -6,7 +6,6 @@ export interface PilotsState {
     pilotData: PilotType[] | [];
     isLoading: boolean;
     isError: string;
-    images: string[];
 }
 
 export interface PilotType {
@@ -34,7 +33,6 @@ const initialState: PilotsState = {
     pilotData: [],
     isLoading: false,
     isError: '',
-    images: [],
 };
 
 const pilotsSlice = createSlice({
@@ -79,7 +77,8 @@ const pilotsSlice = createSlice({
     },
 });
 
-export const findPilots = createAsyncThunk(
+//* HAVE TO REFRESH ON WHY THIS TYPE WORKS
+export const findPilots = createAsyncThunk<PilotType, string, any>(
     'pilots/findPilots',
     async (url: string, { rejectWithValue }) => {
         try {

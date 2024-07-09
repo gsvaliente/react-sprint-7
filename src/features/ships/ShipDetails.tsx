@@ -4,6 +4,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks/useReduxHooks';
 import { BackButton } from '../../ui/BackButton';
 import { Loader } from '../../ui/Loader';
 import { Title } from '../../ui/Title';
+import MovieList from '../movies/MovieList';
+import { findMovies } from '../movies/moviesSlice';
 import PilotList from '../pilots/PilotList';
 import { findPilots } from '../pilots/pilotsSlice';
 import { findShip, findShipImage } from './shipsSlice';
@@ -13,8 +15,12 @@ const IMAGE_URL = 'https://starwars-visualguide.com/assets/img/starships/';
 
 export function ShipDetails() {
     const dispatch = useAppDispatch();
-    const { isLoading, ship, image, pilots } = useAppSelector(
+    const { isLoading, ship, image, pilots, films } = useAppSelector(
         store => store.ships
+    );
+    const { isLoading: isMovieLoading } = useAppSelector(store => store.movies);
+    const { isLoading: isPilotsLoading } = useAppSelector(
+        store => store.pilots
     );
     const { id } = useParams();
 
@@ -24,12 +30,12 @@ export function ShipDetails() {
     }, [dispatch, id]);
 
     useEffect(() => {
-        // if (pilots?.length === 0) {
-        //     dispatch(clearPilots());
-        //     return;
-        // }
         pilots?.forEach(pilot => dispatch(findPilots(pilot)));
     }, [dispatch, pilots]);
+
+    useEffect(() => {
+        films?.forEach(film => dispatch(findMovies(film)));
+    }, [dispatch, films]);
 
     return (
         <div className='mt-10 max-w-6xl mx-auto'>
@@ -110,7 +116,9 @@ export function ShipDetails() {
                     </>
                 )}
             </div>
-            <PilotList />
+            {isPilotsLoading ? <Loader /> : <PilotList />}
+            {isMovieLoading ? <Loader /> : <MovieList />}
+            {/* <MovieList /> */}
         </div>
     );
 }
