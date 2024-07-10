@@ -16,8 +16,10 @@ function ShipList() {
     );
 
     useEffect(() => {
-        dispatch(findShips(`${API_URL}${page}`));
-    }, [dispatch, page]);
+        if (shipList.length === 0) {
+            dispatch(findShips(`${API_URL}${page}`));
+        }
+    }, [dispatch, page, shipList]);
 
     useEffect(() => {
         // if (shipList.length <= 0) return;
@@ -44,7 +46,9 @@ function ShipList() {
             {!isLoading && (
                 <div className='join my-5 flex justify-center text-center align-middle'>
                     <button
-                        onClick={() => dispatch(loadMore(`${API_URL}${page}`))}
+                        onClick={() =>
+                            dispatch(loadMore(`${API_URL}${page + 1}`))
+                        }
                     >
                         load more
                     </button>

@@ -31,16 +31,12 @@ const shipsSlice = createSlice({
     initialState,
     reducers: {
         clearShip(state) {
-            // state.isLoading = false;
             state.isError = '';
             state.ship = undefined;
             state.films = null;
             state.pilots = null;
             state.image = '';
             // state.shipList = [];
-        },
-        nextPage(state) {
-            state.page++;
         },
         loadMore(state, action: PayloadAction<StarshipType[]>) {
             state.shipList = state.shipList.concat(action.payload);
@@ -99,7 +95,6 @@ export function loadMore(url: string) {
     return async function (dispatch: AppDispatch) {
         try {
             dispatch({ type: 'ships/findingShips' });
-            dispatch({ type: 'ships/nextPage' });
 
             const res = await fetch(url);
             const data = await res.json();
@@ -110,5 +105,5 @@ export function loadMore(url: string) {
     };
 }
 
-export const { nextPage, clearShip } = shipsSlice.actions;
+export const { clearShip } = shipsSlice.actions;
 export default shipsSlice.reducer;
