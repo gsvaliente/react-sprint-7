@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/useReduxHooks';
+import ErrorMessage from '../../ui/ErrorMessage';
 import { Header } from '../../ui/Header';
 import { PageNav } from '../../ui/PageNav';
 import { createUser } from './usersThunks';
@@ -75,11 +76,7 @@ export default function Register() {
                             onChange={e => setPasswordConfirm(e.target.value)}
                         />
                     </div>
-                    {error.length > 0 && (
-                        <p className='text-xs text-red-300 rounded-full ml-2'>
-                            {error}
-                        </p>
-                    )}
+                    {error.length > 0 && <ErrorMessage message={error} />}
                     <button
                         className='mt-5 btn btn-wide'
                         disabled={isLoading}

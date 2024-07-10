@@ -103,21 +103,5 @@ const shipsSlice = createSlice({
     },
 });
 
-// export function loadMore(url: string) {
-//     if (!url) return { type: 'ships/notFound', payload: 'No URL provided' };
-
-//     return async function (dispatch: AppDispatch) {
-//         try {
-//             dispatch({ type: 'ships/findingShips' });
-
-//             const res = await fetch(url);
-//             const data = await res.json();
-//             dispatch({ type: 'ships/loadMore', payload: data.results });
-//         } catch (error: any) {
-//             dispatch({ type: 'ships/notFound', payload: error.message });
-//         }
-//     };
-// }
-
 export const { clearShip } = shipsSlice.actions;
 export default shipsSlice.reducer;

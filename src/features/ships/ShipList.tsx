@@ -27,7 +27,6 @@ function ShipList() {
     }, [dispatch, page, shipList]);
 
     useEffect(() => {
-        // if (shipList.length <= 0) return;
         dispatch(clearPilots());
         dispatch(clearShip());
         dispatch(clearMovies());

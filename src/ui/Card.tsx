@@ -5,10 +5,10 @@ interface CardProps {
 
 export default function Card({ img, name }: CardProps) {
     return (
-        <div className='card bg-base-100 w-96 shadow-xl'>
+        <div className='card bg-base-200 w-96 shadow-xl rounded-lg border-b-2 border-b-red-400'>
             <figure>
                 <img
-                    className='max-h-96'
+                    className='max-h-96 pt-5 rounded-t-[60px]'
                     src={img}
                     alt={img}
                 />

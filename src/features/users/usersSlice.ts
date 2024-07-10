@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice } from '@reduxjs/toolkit';
-import { loginUser, createUser } from './usersThunks';
+import { createUser, loginUser } from './usersThunks';
 
 export interface UsersState {
     isAuth: boolean;
@@ -15,7 +15,7 @@ export interface UsersState {
 
 const initialState: UsersState = {
     //TODO change back to false
-    isAuth: true,
+    isAuth: false,
     isLoading: false,
     error: '',
     userData: null,
@@ -47,7 +47,7 @@ const usersSlice = createSlice({
             .addCase(loginUser.rejected, state => {
                 state.isLoading = false;
                 state.isAuth = false;
-                state.error = 'something went wrong';
+                state.error = 'Email or Password are not correct';
             })
             .addCase(createUser.pending, state => {
                 state.isLoading = true;
