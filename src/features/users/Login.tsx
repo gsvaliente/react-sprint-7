@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { loginUser } from '../features/users/usersSlice';
-import { useAppSelector } from '../hooks/useReduxHooks';
-import { Header } from '../ui/Header';
-import { PageNav } from '../ui/PageNav';
+import { useAppSelector } from '../../hooks/useReduxHooks';
+import { Header } from '../../ui/Header';
+import { PageNav } from '../../ui/PageNav';
+import { loginUser } from './usersThunks';
 
 export default function Login() {
     const [email, setEmail] = useState('');

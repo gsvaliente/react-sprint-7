@@ -1,11 +1,11 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ShipDetails } from './features/ships/ShipDetails';
 import ShipList from './features/ships/ShipList';
+import Login from './features/users/Login';
+import Register from './features/users/Register';
 import { AppLayout } from './pages/AppLayout';
 import { Homepage } from './pages/Homepage';
-import Login from './pages/Login';
 import { PageNotFound } from './pages/PageNotFound';
-import Register from './pages/Register';
 
 function App() {
     return (

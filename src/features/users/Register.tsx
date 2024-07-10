@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { createUser } from '../features/users/usersSlice';
-import { useAppSelector } from '../hooks/useReduxHooks';
-import { Header } from '../ui/Header';
-import { PageNav } from '../ui/PageNav';
+import { useAppSelector } from '../../hooks/useReduxHooks';
+import { Header } from '../../ui/Header';
+import { PageNav } from '../../ui/PageNav';
+import { createUser } from './usersThunks';
 
 export default function Register() {
     const [email, setEmail] = useState('');

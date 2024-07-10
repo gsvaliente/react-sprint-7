@@ -5,10 +5,10 @@ import { BackButton } from '../../ui/BackButton';
 import { Loader } from '../../ui/Loader';
 import { Title } from '../../ui/Title';
 import MovieList from '../movies/MovieList';
-import { findMovies } from '../movies/moviesSlice';
+import { findMovies } from '../movies/moviesThunks';
 import PilotList from '../pilots/PilotList';
-import { findPilots } from '../pilots/pilotsSlice';
-import { findShip, findShipImage } from './shipsSlice';
+import { findPilots } from '../pilots/pilotsThunks';
+import { findShip, findShipImage } from './shipsThunks';
 
 const URL = `https://swapi.dev/api/starships/`;
 const IMAGE_URL = 'https://starwars-visualguide.com/assets/img/starships/';

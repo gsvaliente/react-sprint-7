@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { getIdFromUrl } from '../../helpers/getIdFromUrl';
+import { findMovies } from './moviesThunks';
 
 export interface MoviesState {
     isLoading: boolean;
@@ -60,25 +61,13 @@ const moviesSlice = createSlice({
                         )}.jpg`,
                     },
                 ];
+            })
+            .addCase(findMovies.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = action.error.message || '';
             });
     },
 });
-
-export const findMovies = createAsyncThunk<MovieType, string, any>(
-    'movies/findMovies',
-    async (url: string, { rejectWithValue }) => {
-        try {
-            const res = await fetch(url);
-            const data = await res.json();
-
-            return data;
-        } catch (error: any) {
-            return rejectWithValue(
-                error.response?.data || 'failed to fetch movie details'
-            );
-        }
-    }
-);
 
 export const { clearMovies } = moviesSlice.actions;
 export default moviesSlice.reducer;

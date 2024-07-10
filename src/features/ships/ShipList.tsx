@@ -4,32 +4,27 @@ import { Loader } from '../../ui/Loader';
 import { clearMovies } from '../movies/moviesSlice';
 import { clearPilots } from '../pilots/pilotsSlice';
 import { ShipItem } from './ShipItem';
-import {
-    ShipsState,
-    clearShip,
-    findShips,
-    loadMore,
-    nextPage,
-    prevPage,
-} from './shipsSlice';
+import { ShipsState, clearShip, loadMore } from './shipsSlice';
+import { findShips } from './shipsThunks';
 
 const API_URL = 'https://swapi.dev/api/starships/?page=';
 
 function ShipList() {
     const dispatch = useAppDispatch();
     const { shipList, isLoading, isError, page }: ShipsState = useAppSelector(
-        shop => shop.ships
+        store => store.ships
     );
 
     useEffect(() => {
-        dispatch(findShips(`${API_URL}1`));
-    }, [dispatch]);
+        dispatch(findShips(`${API_URL}${page}`));
+    }, [dispatch, page]);
 
     useEffect(() => {
+        // if (shipList.length <= 0) return;
         dispatch(clearPilots());
         dispatch(clearShip());
         dispatch(clearMovies());
-    }, [dispatch]);
+    }, [dispatch, shipList]);
 
     return (
         <div className='mt-5'>
@@ -48,25 +43,6 @@ function ShipList() {
             </ul>
             {!isLoading && (
                 <div className='join my-5 flex justify-center text-center align-middle'>
-                    {page > 1 && (
-                        <button
-                            className='btn join-item btn-sm'
-                            onClick={() => dispatch(prevPage())}
-                        >
-                            «
-                        </button>
-                    )}
-                    <button className='btn join-item btn-sm'>
-                        Page {page}
-                    </button>
-                    {page < 4 && (
-                        <button
-                            className='btn join-item btn-sm '
-                            onClick={() => dispatch(nextPage())}
-                        >
-                            »
-                        </button>
-                    )}
                     <button
                         onClick={() => dispatch(loadMore(`${API_URL}${page}`))}
                     >

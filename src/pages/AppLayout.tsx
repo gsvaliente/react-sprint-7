@@ -14,11 +14,4 @@ export function AppLayout() {
     ) : (
         <Navigate to={'/login'} />
     );
-    // return (
-    //     <div className='font-spaceMono'>
-    //         <Header />
-    //         <PageNav />
-    //         <Outlet />
-    //     </div>
-    // );
 }

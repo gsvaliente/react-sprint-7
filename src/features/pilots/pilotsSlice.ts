@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { getIdFromUrl } from '../../helpers/getIdFromUrl';
+import { findPilots } from './pilotsThunks';
 
 export interface PilotsState {
     pilotData: PilotType[] | [];
@@ -39,13 +40,6 @@ const pilotsSlice = createSlice({
     name: 'pilots',
     initialState,
     reducers: {
-        findingPilots(state) {
-            state.isLoading = true;
-        },
-        notFound(state, action: PayloadAction<string>) {
-            state.isError = action.payload;
-            state.isLoading = false;
-        },
         clearPilots(state) {
             state.pilotData = [];
         },
@@ -77,22 +71,5 @@ const pilotsSlice = createSlice({
     },
 });
 
-//* HAVE TO REFRESH ON WHY THIS TYPE WORKS
-export const findPilots = createAsyncThunk<PilotType, string, any>(
-    'pilots/findPilots',
-    async (url: string, { rejectWithValue }) => {
-        try {
-            const res = await fetch(url);
-            const data = await res.json();
-
-            return data;
-        } catch (error: any) {
-            return rejectWithValue(
-                error.response?.data || 'failed to fetch pilot details'
-            );
-        }
-    }
-);
-
-export const { findingPilots, notFound, clearPilots } = pilotsSlice.actions;
+export const { clearPilots } = pilotsSlice.actions;
 export default pilotsSlice.reducer;
