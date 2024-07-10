@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import type { AppDispatch } from '../../store';
 import type { StarshipType } from '../../types/Ship.interface';
-import { findShip, findShipImage, findShips } from './shipsThunks';
+import { findShip, findShipImage, findShips, loadMore } from './shipsThunks';
 
 export interface ShipsState {
     shipList: StarshipType[];
@@ -39,6 +38,7 @@ const shipsSlice = createSlice({
             // state.shipList = [];
         },
         loadMore(state, action: PayloadAction<StarshipType[]>) {
+            state.page = state.page + 1;
             state.shipList = state.shipList.concat(action.payload);
             state.isLoading = false;
         },
@@ -85,25 +85,39 @@ const shipsSlice = createSlice({
             .addCase(findShipImage.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = action.error.message || '';
+            })
+            .addCase(loadMore.pending, state => {
+                state.isLoading = true;
+                state.isError = '';
+            })
+            .addCase(loadMore.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.page = state.page + 1;
+                state.isError = '';
+                state.shipList = [...state.shipList.concat(action.payload)];
+            })
+            .addCase(loadMore.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = action.error.message || '';
             });
     },
 });
 
-export function loadMore(url: string) {
-    if (!url) return { type: 'ships/notFound', payload: 'No URL provided' };
+// export function loadMore(url: string) {
+//     if (!url) return { type: 'ships/notFound', payload: 'No URL provided' };
 
-    return async function (dispatch: AppDispatch) {
-        try {
-            dispatch({ type: 'ships/findingShips' });
+//     return async function (dispatch: AppDispatch) {
+//         try {
+//             dispatch({ type: 'ships/findingShips' });
 
-            const res = await fetch(url);
-            const data = await res.json();
-            dispatch({ type: 'ships/loadMore', payload: data.results });
-        } catch (error: any) {
-            dispatch({ type: 'ships/notFound', payload: error.message });
-        }
-    };
-}
+//             const res = await fetch(url);
+//             const data = await res.json();
+//             dispatch({ type: 'ships/loadMore', payload: data.results });
+//         } catch (error: any) {
+//             dispatch({ type: 'ships/notFound', payload: error.message });
+//         }
+//     };
+// }
 
 export const { clearShip } = shipsSlice.actions;
 export default shipsSlice.reducer;

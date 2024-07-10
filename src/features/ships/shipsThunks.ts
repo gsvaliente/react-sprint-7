@@ -52,3 +52,19 @@ export const findShipImage = createAsyncThunk<string, string, any>(
         }
     }
 );
+
+export const loadMore = createAsyncThunk<StarshipType, string, any>(
+    'ships/loadMore',
+    async (url: string, { rejectWithValue }) => {
+        try {
+            const res = await fetch(url);
+            if (!res.ok) return Promise.reject();
+            const data = await res.json();
+            return data.results;
+        } catch (error: any) {
+            return rejectWithValue(
+                error.response?.data || 'Failed to fetch ships'
+            );
+        }
+    }
+);

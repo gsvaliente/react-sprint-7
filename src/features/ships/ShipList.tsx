@@ -4,8 +4,8 @@ import { Loader } from '../../ui/Loader';
 import { clearMovies } from '../movies/moviesSlice';
 import { clearPilots } from '../pilots/pilotsSlice';
 import { ShipItem } from './ShipItem';
-import { ShipsState, clearShip, loadMore } from './shipsSlice';
-import { findShips } from './shipsThunks';
+import { ShipsState, clearShip } from './shipsSlice';
+import { findShips, loadMore } from './shipsThunks';
 
 const API_URL = 'https://swapi.dev/api/starships/?page=';
 
@@ -14,6 +14,11 @@ function ShipList() {
     const { shipList, isLoading, isError, page }: ShipsState = useAppSelector(
         store => store.ships
     );
+
+    function handleLoadMore() {
+        if (isError) return;
+        dispatch(loadMore(`${API_URL}${page + 1}`));
+    }
 
     useEffect(() => {
         if (shipList.length === 0) {
@@ -31,7 +36,7 @@ function ShipList() {
     return (
         <div className='mt-5'>
             <ul className='align-center justify-center flex flex-col items-center space-y-5'>
-                {isError && <p>{isError}</p>}
+                {/* {isError && <p>{isError}</p>} */}
                 {isLoading ? (
                     <Loader />
                 ) : (
@@ -43,15 +48,9 @@ function ShipList() {
                     ))
                 )}
             </ul>
-            {!isLoading && (
+            {!isLoading && page <= 3 && (
                 <div className='join my-5 flex justify-center text-center align-middle'>
-                    <button
-                        onClick={() =>
-                            dispatch(loadMore(`${API_URL}${page + 1}`))
-                        }
-                    >
-                        load more
-                    </button>
+                    <button onClick={handleLoadMore}>load more</button>
                 </div>
             )}
         </div>
