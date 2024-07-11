@@ -33,7 +33,7 @@ function ShipList() {
     }, [dispatch, shipList]);
 
     return (
-        <div className='mt-5'>
+        <div className='my-5'>
             <ul className='align-center justify-center flex flex-col items-center space-y-5'>
                 {/* {isError && <p>{isError}</p>} */}
                 {isLoading ? (
@@ -48,8 +48,13 @@ function ShipList() {
                 )}
             </ul>
             {!isLoading && page <= 3 && (
-                <div className='join my-5 flex justify-center text-center align-middle'>
-                    <button onClick={handleLoadMore}>load more</button>
+                <div className='my-5 flex items-center justify-center'>
+                    <button
+                        className='btn btn-ghost rounded-full border border-stone-300'
+                        onClick={handleLoadMore}
+                    >
+                        load more
+                    </button>
                 </div>
             )}
         </div>

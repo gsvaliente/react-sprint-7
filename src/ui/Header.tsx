@@ -10,9 +10,9 @@ export function Header() {
     const dispatch = useDispatch();
 
     return (
-        <header className='navbar bg-base-98 pt-10 max-w-screen-fit flex items-center justify-around px-10'>
+        <header className='navbar bg-base-98 pt-10 max-w-screen-fit flex flex-col sm:flex-row items-center justify-around px-10'>
             <div className='navbar-start'>
-                <div className='join'>
+                <div className='join hidden sm:block transition-all'>
                     <button className='btn btn-ghost rounded-full join-item'>
                         <a
                             href='https://www.instagram.com/starwars/?hl=en'
@@ -43,7 +43,7 @@ export function Header() {
             <img
                 src={logo}
                 alt='Star Wars logo'
-                className='h-28'
+                className='h-24'
             />
             <div className='navbar-end'>
                 {isAuth ? (

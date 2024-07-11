@@ -10,7 +10,7 @@ export function PageNav() {
         isAuth && (
             <div
                 role='tablist'
-                className='tabs-bordered tabs-sm mt-10 py-2 text-center '
+                className='tabs-bordered tabs-lg mt-5 pb-0 border-b border-stone-600 py-2 text-center '
             >
                 <Link
                     role='tab'
