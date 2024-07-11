@@ -1,30 +1,115 @@
-# React + TypeScript + Vite
+# Star Wars API App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a React-based web application that utilizes the Star Wars API to display information about various Star Wars Starships, Films, And Characters.
 
-Currently, two official plugins are available:
+## Screenshots
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![Login Screen](./public/loginscreen.png)
+![Home Screen](./public/homescreen.png)
+![Ship Details Screen](./public/shipdetails.png)
 
-## Expanding the ESLint configuration
+## How To Install
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+To install the React-based web application that utilizes the Star Wars API, follow these steps:
 
-- Configure the top-level `parserOptions` property like this:
+1. Make sure you have Node.js installed on your machine.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+2. Open your terminal and clone this repository:
+
+```
+https://github.com/gsvaliente/react-sprint-7.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+3. Install the project dependencies using pnpm:
+
+```
+pnpm install
+```
+
+or using yarn:
+
+```
+yarn install
+```
+
+or using npm:
+
+```
+npm install
+```
+
+4. Start the development server:
+
+```
+pnpm dev
+```
+
+or
+
+```
+yarn dev
+```
+
+or
+
+```
+npm run dev
+```
+
+5. Open your browser and visit `http://localhost:` with the port that is being used in the terminal to see the application running.
+
+6. Register as a user and enjoy the app.
+
+## Technologies Used
+
+-   Redux Toolkit
+-   Firebase
+-   React Router
+-   Tailwind CSS
+-   Daisy UI
+-   TypeScript
+
+## Project Structure
+
+The project structure is as follows:
+
+```
+star-wars-api/
+├── src/
+│   ├── features/
+│   │   ├── movies.js
+│   │   ├── pilots.js
+│   │   ├── ships.js
+│   │   └── ...
+│   ├── pages/
+│   │   ├── AppLayout.js
+│   │   ├── HomePage.js
+│   │   ├── PageNotFound.js
+│   │   └── ...
+│   ├── ui/
+│   │   ├── BackButton.js
+│   │   ├── Card.js
+│   │   ├── ErrorMessage.js
+│   │   ├── Footer.js
+│   │   ├── Header.js
+│   │   ├── Loader.js
+│   │   └── ...
+│   ├── App.js
+│   ├── index.js
+│   └── ...
+├── .gitignore
+├── package.json
+└── README.md
+```
+
+The `src` directory contains all the source code for the application. It is further divided into `components`, `pages`, and `services` directories.
+
+-   The `components` directory contains reusable React components such as `CharacterCard`, `FilmCard`, `PlanetCard`, and more.
+-   The `pages` directory contains the main pages of the application, such as `CharactersPage`, `FilmsPage`, `PlanetsPage`, and more.
+-   The `services` directory contains utility functions and API integration code, such as `api.js`.
+
+The `public` directory contains the `index.html` file, which serves as the entry point for the application.
+
+The root directory also contains the `.gitignore` file, `package.json` file for managing dependencies, and this `README.md` file.
+
+Feel free to explore the code and make any necessary modifications to suit your needs.
